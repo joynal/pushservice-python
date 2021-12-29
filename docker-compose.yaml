@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    hostname: postgres
+    environment:
+      POSTGRES_DB: pushservice_db
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5400:5432"

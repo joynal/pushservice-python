@@ -1,0 +1,16 @@
+# settings template which contains all settings:
+#   adapter config, cross cutting concern settings (e.g. logging), app settings, etc.
+#
+# for example...
+log_level: info
+
+grpc_api:
+    port: 5000
+    host: <GRPC_HOST>
+
+web_api:
+    port: 80
+    host: <WEB_HOST>
+
+database: "odbc://server:port;db;etc"
+sentry_url: <SENTRY_URL>
