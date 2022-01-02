@@ -68,3 +68,17 @@ of the application can be expressed as an aggregate of the use cases.
 * Run preflight checks
 * Start/serve/initiate/etc. the primary adapters
 * Top level exception handling and graceful process exiting
+
+
+
+## Runningal
+> alembic upgrade head
+
+### Downgrading
+- To remove all migrations done do:
+> alembic downgrade base
+
+- To go back to a specific migration revision do:
+> alembic downgrade <revision_id>
+
+`NOTE`: You can do `alembic history` to a view a list of migrations in the project

@@ -1,0 +1,16 @@
+Todos:
+- subscriber seeder
+- push seeder
+- notification parser
+- notification sender
+- test
+- documentation
+- set proper indexing
+- publish to github
+- add schema test
+
+
+
+Resources:
+https://gist.github.com/vpzed/90bcc4cc092fe7fa0de92766dd1c2368
+jsonb - https://github.com/Galarzaa90/NabBot/blob/master/launcher.py

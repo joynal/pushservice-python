@@ -9,7 +9,7 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func, expression
 
 # revision identifiers, used by Alembic.
 revision = 'ce31b295674e'
@@ -29,8 +29,8 @@ def upgrade():
             unique=True,
         ),
         sa.Column("site_id", UUID(as_uuid=True), nullable=False),
-        sa.Column("subscribed", sa.Boolean, nullable=False, default=True),
-        sa.Column("push_endpoint", JSONB, nullable=False),
+        sa.Column("subscribed", sa.Boolean, nullable=False, server_default=expression.true()),
+        sa.Column("endpoint", JSONB, nullable=False),
         sa.ForeignKeyConstraint(('site_id',), ['site.id'], name='subscriber_site_id_fk', ondelete='CASCADE',
                                 onupdate='CASCADE'),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
