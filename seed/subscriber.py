@@ -7,15 +7,15 @@ import secrets
 from parser.adapters.secondary.persistence_sql.client import DBClient
 from parser.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
 from parser.core.domain.entities import NewSubscriber
-from parser.settings import load_settings
+from parser.settings import load
 
-parser = argparse.ArgumentParser(description="Meter script for oda.")
+parser = argparse.ArgumentParser(description="Subscriber generator script")
 parser.add_argument("-s", "--site-id", help="Site id for subscribers", required=True)
 parser.add_argument("-l", "--length", help="Number of subscribers", default=200000, required=True)
 parser.add_argument("-b", "--batch-size", help="Insertion batch size", default=20000)
 args = parser.parse_args()
 
-settings = load_settings("./settings.yaml")
+settings = load("./settings.yaml")
 
 
 def generate_endpoint():

@@ -1,7 +1,8 @@
 import logging
 
 from typing import List
-from python_app_template.adapters.primary.runnable import Runnable
+from parser.adapters.primary.runnable import Runnable
+
 
 class Application:
     """

@@ -2,11 +2,10 @@ import asyncio
 
 from parser.adapters.secondary.persistence_sql.client import DBClient
 from parser.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
-from parser.core.domain.entities import NewSite
 from parser.core.domain.vapid import generate_vapid_keypair
-from parser.settings import load_settings
+from parser.settings import load
 
-settings = load_settings("./settings.yaml")
+settings = load("./settings.yaml")
 
 
 async def main():

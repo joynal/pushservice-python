@@ -4,22 +4,22 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from parser.settings import load_settings
+from parser.settings import load
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 
 config = context.config
 
-settings = load_settings("./settings.yaml")
+settings = load("./settings.yaml")
 
-if not settings.database.connection_uri:
-    print("'db_connection is not configured in settings.yaml'")
+if not settings.database.connection_string:
+    print("database connection is not configured in settings.yaml")
     exit(0)
 
 # replace `postgres` with `postgresql`
-connection_uri = settings.database.connection_uri.replace("postgres://", "postgresql://", 1)
-config.set_main_option("sqlalchemy.url", connection_uri)
+connection_string = settings.database.connection_string.replace("postgres://", "postgresql://", 1)
+config.set_main_option("sqlalchemy.url", connection_string)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

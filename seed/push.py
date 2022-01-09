@@ -3,13 +3,13 @@ import asyncio
 
 from parser.adapters.secondary.persistence_sql.client import DBClient
 from parser.adapters.secondary.persistence_sql.push_repo import PushRepoSql
-from parser.settings import load_settings
+from parser.settings import load
 
-parser = argparse.ArgumentParser(description="Meter script for oda.")
-parser.add_argument("-s", "--site-id", help="Site id for pushs", required=True)
+parser = argparse.ArgumentParser(description="Push generator script")
+parser.add_argument("-s", "--site-id", help="Site id for push", required=True)
 args = parser.parse_args()
 
-settings = load_settings("./settings.yaml")
+settings = load("./settings.yaml")
 
 
 async def main():

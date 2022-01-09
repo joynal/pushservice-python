@@ -1,16 +1,14 @@
-# settings template which contains all settings:
-#   adapter config, cross cutting concern settings (e.g. logging), app settings, etc.
-#
-# for example...
-log_level: info
+worker:
+  log_level: info
+  debug: true
 
-grpc_api:
-    port: 5000
-    host: <GRPC_HOST>
+database:
+  connection_string: "postgres://test_user:password@localhost:5400/pushservice-db"
 
-web_api:
-    port: 80
-    host: <WEB_HOST>
+kafka:
+  brokers:
+    - localhost:9393
+  topic: "pushservice.notifications"
+  group_id: "ParserConsumerGroup"
+  service_name: "ParserConsumer"
 
-database: "odbc://server:port;db;etc"
-sentry_url: <SENTRY_URL>

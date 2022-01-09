@@ -2,7 +2,6 @@
 
 Revision ID: bfc7ca1c7a75
 Revises: cd154eefba09
-Create Date: 2021-12-28 07:19:31.185757
 
 """
 import sqlalchemy as sa
@@ -19,7 +18,7 @@ branch_labels = None
 depends_on = 'cd154eefba09'
 
 status = ("QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELED")
-status_enum = ENUM(*status, name="push_status", create_type=False)
+status_enum = ENUM(*status, name="push_status_enum")
 
 
 def upgrade():
@@ -50,3 +49,4 @@ def upgrade():
 
 def downgrade():
     op.drop_table("push")
+    op.execute("DROP TYPE push_status_enum")

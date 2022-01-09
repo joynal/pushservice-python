@@ -4,13 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-alembic = "*"
-pyyaml = "*"
+alembic = "==1.7.5"
+pyyaml = "==6.0"
 psycopg2-binary = "*"
-asyncpg = "*"
-ecdsa = "*"
+asyncpg = "==0.25.0"
+ecdsa = "==0.17.0"
+kafka-python = "*"
+dacite = "==1.6.0"
+sqlalchemy = "==1.4.29"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
