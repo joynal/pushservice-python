@@ -1,31 +1,30 @@
-import signal
+import logging
+
+from parser.app import Application
+from parser.settings import load
 
 
-def load(path):
-    ...
-
-def setup_logging(log_level:str =None):
-    ...
-
-def log_settings(settings: dict, logger=None):
-    ...
-
-# Properly handle stopping of your threads
-# when you Ctrl+c on local
-def signal_handler(sig, frame, app):
-    print("Pressed: Ctrl+c - Stopping application...")
-    app.stop()
+def setup_logging(log_level):
+    logger = logging.getLogger()
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    ch = logging.StreamHandler()
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    logger.setLevel(log_level)
 
 
 def main():
     settings = load("./settings.yaml")
-    logger = setup_logging(settings.log_level)
 
-    log_settings(settings=settings.to_dict(), logger=logger)
-
+    setup_logging(log_level=settings.worker.log_level)
     app = Application(settings=settings)
-    signal.signal(signal.SIGINT, lambda sig, frame: signal_handler(sig, frame, app))
-    app.run()
+
+    try:
+        app.run()
+    except KeyboardInterrupt:
+        app.stop()
 
 
 if __name__ == "__main__":
