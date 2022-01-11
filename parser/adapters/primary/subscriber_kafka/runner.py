@@ -23,8 +23,7 @@ class SubscriberKafka(Runnable):
         )
 
         for message in self.consumer:
-            self.logger.info("message:", message)
-            self.logger.info("message_value:", message.value)
+            self.logger.info("message_value:", message.value.decode('utf-8'))
 
     def stop(self):
         print("stopping kafka consumer")

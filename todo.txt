@@ -1,13 +1,18 @@
 Todos:
-- subscriber seeder
-- push seeder
+- subscriber stream class
+- kafka producer class
+- kafka consumer class
+- kafka consumber reconnect strategy
 - notification parser
 - notification sender
 - test
+- add schema test
 - documentation
 - set proper indexing
+- improve naiming
+- kafka docker authenticaiton
+- github CI setup for test
 - publish to github
-- add schema test
 
 
 
