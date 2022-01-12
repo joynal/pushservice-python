@@ -14,5 +14,6 @@ class SubscriberRepoSql(BaseRepoSql):
     async def subscriber_stream(self):
         async with self.pool.acquire() as conn:
             stmt = await conn.prepare(self.get_query('fetch_stream'))
-            async for record in stmt.cursor('c540eac3-a97b-4a22-a0b1-88475e9fe4e9'):
-                print(record)
+            async with conn.transaction():
+                async for record in stmt.cursor('c540eac3-a97b-4a22-a0b1-88475e9fe4e9'):
+                    print(record)

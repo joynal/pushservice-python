@@ -10,6 +10,6 @@ VALUES
 
 fetch_stream = """
 SELECT *
-FROM subscriber s
-WHERE s.sited_id=$1 and s.subscribed=true;
+FROM subscriber
+WHERE site_id=$1 AND subscribed=true;
 """
