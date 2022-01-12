@@ -1,3 +1,13 @@
+### Create a topic:
+
+```bash
+docker exec -it kafka sh -c "/opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9093 --replication-factor 1 --partitions 3 --topic notification"
+```
+
+
+
+
+
 # python-app-template
 The python-app-template is a templated application structure that can be used
 for all new and existing (with a refactor) applications. The structure is based
