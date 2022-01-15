@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 from parser.app import Application
@@ -15,17 +16,19 @@ def setup_logging(log_level):
     logger.setLevel(log_level)
 
 
-def main():
+async def main():
     settings = load("./settings.yaml")
 
     setup_logging(log_level=settings.worker.log_level)
     app = Application(settings=settings)
 
     try:
-        app.run()
+        await app.run()
     except KeyboardInterrupt:
         app.stop()
 
 
 if __name__ == "__main__":
-    main()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(main())

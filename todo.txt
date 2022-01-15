@@ -5,6 +5,7 @@ Todos:
 - kafka consumber reconnect strategy
 - notification parser
 - notification sender
+- schedule notification script
 - test
 - add schema test
 - documentation
