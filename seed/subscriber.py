@@ -46,7 +46,7 @@ async def main():
         for _ in range(int(batch_size)):
             subscribers.append((args.site_id, generate_endpoint(),))
         length -= batch_size
-        await subscriber_repo.create_many(subscribers)
+        await subscriber_repo.create_many(entity_list=subscribers)
         print("batch inserted: ", batch_num + 1)
 
 

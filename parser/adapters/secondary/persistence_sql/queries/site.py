@@ -6,3 +6,9 @@ VALUES
     public_key,
     private_key;
 """
+
+fetch_site = """
+SELECT *
+FROM site
+WHERE id = $1;
+"""

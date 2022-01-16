@@ -16,8 +16,10 @@ async def main():
     db_client = DBClient(settings.database)
     await db_client.init()
     subscriber_repo = SubscriberRepoSql(db_client)
-    await subscriber_repo.subscriber_stream(site_id=UUID("3f7230bd-af13-4b9b-a351-e00e7429bf78"),
-                                            callback=process_subscriber)
+    await subscriber_repo.get_all(
+        site_id=UUID("3f7230bd-af13-4b9b-a351-e00e7429bf78"),
+        callback=process_subscriber
+    )
 
 
 if __name__ == "__main__":

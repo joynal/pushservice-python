@@ -20,7 +20,7 @@ async def main():
         "body": "Ignore it, it's a test notification",
         "icon": "https://avatars3.githubusercontent.com/u/6458212",
     }
-    res = await push_repo.create((args.site_id, "I came from demo", "https://joynal.dev", options))
+    res = await push_repo.create(entity=(args.site_id, "I came from demo", "https://joynal.dev", options))
     print("push created", res)
 
 

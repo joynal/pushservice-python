@@ -37,7 +37,7 @@ def upgrade():
         sa.Column("options", JSONB, nullable=False),
         sa.Column("launch_url", sa.TEXT, nullable=False),
         sa.Column("priority", sa.TEXT, server_default="normal"),
-        sa.Column("time_to_live", sa.INTEGER, default=259200),
+        sa.Column("time_to_live", sa.INTEGER, server_default=259200),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.ForeignKeyConstraint(('site_id',), ['site.id'], name='push_site_id_fk', ondelete='CASCADE',

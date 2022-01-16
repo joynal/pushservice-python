@@ -13,7 +13,7 @@ async def main():
     await db_client.init()
     site_repo = SiteRepoSql(db_client)
     keys = generate_vapid_keypair()
-    res = await site_repo.create((keys['public_key'], keys['private_key']))
+    res = await site_repo.create(entity=(keys['public_key'], keys['private_key']))
     print("site created: ", res)
 
 

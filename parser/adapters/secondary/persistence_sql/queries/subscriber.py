@@ -8,6 +8,12 @@ VALUES
     endpoint;
 """
 
+fetch_subscriber = """
+SELECT *
+FROM subscriber
+WHERE id = $1;
+"""
+
 fetch_stream = """
 SELECT *
 FROM subscriber

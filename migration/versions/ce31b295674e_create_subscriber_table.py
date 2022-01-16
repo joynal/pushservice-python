@@ -29,7 +29,7 @@ def upgrade():
         ),
         sa.Column("site_id", UUID(as_uuid=True), nullable=False),
         sa.Column("subscribed", sa.Boolean, nullable=False, server_default=expression.true()),
-        sa.Column("endpoint", JSONB, nullable=False),
+        sa.Column("subscription_info", JSONB, nullable=False),
         sa.ForeignKeyConstraint(('site_id',), ['site.id'], name='subscriber_site_id_fk', ondelete='CASCADE',
                                 onupdate='CASCADE'),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),

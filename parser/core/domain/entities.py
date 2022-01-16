@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 from uuid import UUID
 
 
@@ -19,24 +18,11 @@ NewSubscriber = tuple[UUID, dict]
 
 
 @dataclass
-class VapIDKeys:
-    p256dh: str
-    auth: str
-
-
-@dataclass
-class EndpointUrlData:
-    endpoint: str
-    expirationTime: Optional[int]
-    keys: VapIDKeys
-
-
-@dataclass
 class Subscriber:
     id: UUID
     subscribed: bool
     site_id: UUID
-    endpoint: EndpointUrlData
+    endpoint: dict
 
 
 NewPush = tuple[UUID, str, str, dict]
@@ -61,13 +47,18 @@ class Notification:
 
 
 @dataclass
-class SendOptions:
-    vapidDetails: NewSite
-    TTL: int
+class WebpushData:
+    title: str
+    status: str
+    launch_url: str
+    priority: str
+    options: NotificationOptions
 
 
 @dataclass
-class NotificationPayload:
-    endpoint: EndpointUrlData
-    data: Notification
-    options: SendOptions
+class WebpushPayload:
+    subscription_info: dict
+    data: WebpushData
+    ttl: int
+    vapid_private_key: str
+    vapid_claims: dict
