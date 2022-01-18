@@ -2,7 +2,7 @@ create_site = """
 INSERT INTO
     site (public_key, private_key)
 VALUES
-    ( $1, $2) RETURNING id,
+    (%(public_key)s, %(private_key)s) RETURNING id,
     public_key,
     private_key;
 """
@@ -10,5 +10,5 @@ VALUES
 fetch_site = """
 SELECT *
 FROM site
-WHERE id = $1;
+WHERE id=$1;
 """

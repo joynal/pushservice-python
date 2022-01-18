@@ -14,15 +14,16 @@ class Site(NewSite):
     private_key: str
 
 
-NewSubscriber = tuple[UUID, dict]
+@dataclass
+class NewSubscriber:
+    site_id: UUID
+    subscription_info: dict
 
 
 @dataclass
-class Subscriber:
+class Subscriber(NewSubscriber):
     id: UUID
     subscribed: bool
-    site_id: UUID
-    endpoint: dict
 
 
 NewPush = tuple[UUID, str, str, dict]

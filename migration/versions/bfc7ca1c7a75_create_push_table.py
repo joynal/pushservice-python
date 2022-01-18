@@ -12,10 +12,10 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 
 # revision identifiers, used by Alembic.
-revision = 'bfc7ca1c7a75'
-down_revision = 'cd154eefba09'
+revision = "bfc7ca1c7a75"
+down_revision = "cd154eefba09"
 branch_labels = None
-depends_on = 'cd154eefba09'
+depends_on = "cd154eefba09"
 
 status = ("QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELED")
 status_enum = ENUM(*status, name="push_status_enum")
@@ -37,11 +37,16 @@ def upgrade():
         sa.Column("options", JSONB, nullable=False),
         sa.Column("launch_url", sa.TEXT, nullable=False),
         sa.Column("priority", sa.TEXT, server_default="normal"),
-        sa.Column("time_to_live", sa.INTEGER, server_default=259200),
+        sa.Column("time_to_live", sa.INTEGER, server_default="259200"),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
-        sa.ForeignKeyConstraint(('site_id',), ['site.id'], name='push_site_id_fk', ondelete='CASCADE',
-                                onupdate='CASCADE'),
+        sa.ForeignKeyConstraint(
+            ("site_id",),
+            ["site.id"],
+            name="push_site_id_fk",
+            ondelete="CASCADE",
+            onupdate="CASCADE",
+        ),
         sa.Index("push_id_index", "id"),
         sa.Index("push_site_id_index", "site_id"),
     )

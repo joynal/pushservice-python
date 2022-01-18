@@ -24,6 +24,5 @@ class NotificationParser(ProcessNotification):
         # TODO: create a callback for subscriber stream
         # TODO: send notification object to sender topic
         await self.subscriber_repo.get_all(
-            site_id=notification.site_id,
-            callback=parse_notification(notification)
+            site_id=notification.site_id, callback=parse_notification(notification)
         )

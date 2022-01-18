@@ -1,7 +1,8 @@
 import asyncio
+import json
 import logging
-from dacite import from_dict
 
+from dacite import from_dict
 from kafka import KafkaConsumer
 
 from parser.adapters.primary.runnable import Runnable
@@ -25,7 +26,7 @@ class SubscriberKafka(Runnable):
         self.consumer = KafkaConsumer(
             self.settings.topic,
             group_id=self.settings.group_id,
-            bootstrap_servers=self.settings.brokers
+            bootstrap_servers=self.settings.brokers,
         )
         self.consumer_loop()
 
@@ -39,7 +40,9 @@ class SubscriberKafka(Runnable):
 
     async def consume(self):
         for message in self.consumer:
-            notification = from_dict(data_class=Notification, data=message.value)
+            notification = from_dict(
+                data_class=Notification, data=json.loads(message.value)
+            )
             await self.parser.process(notification)
 
     def stop(self):

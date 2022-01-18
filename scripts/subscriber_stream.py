@@ -18,7 +18,7 @@ async def main():
     subscriber_repo = SubscriberRepoSql(db_client)
     await subscriber_repo.get_all(
         site_id=UUID("3f7230bd-af13-4b9b-a351-e00e7429bf78"),
-        callback=process_subscriber
+        callback=process_subscriber,
     )
 
 

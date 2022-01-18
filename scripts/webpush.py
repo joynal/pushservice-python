@@ -7,8 +7,8 @@ try:
             "expirationTime": None,
             "keys": {
                 "p256dh": "BO8n7ZP5o7LpIoHXySJ79bArZwsVBj52_5ImzRZyJVAjWkL2qTE_YUaNYuJIoXJdwIAYlOYEH3eg8Lr92YHLTqk",
-                "auth": "YzQw1LXXZQSY2Mzgd-JRcQ"
-            }
+                "auth": "YzQw1LXXZQSY2Mzgd-JRcQ",
+            },
         },
         # subscription_info={
         #     "endpoint": "https://fcm.googleapis.com/fcm/send/d2Vj2HXnWS0:APA91bGW_si_MDp8h2g016QAZIZy3w5jecWOn4ZB1oWX3qESi9ROlxfNc_QHSb_ELpzOGE5dRGwaa2M2rPGzFDZC63OV5962BH3747qg1bw2GkMVv3_pkfUDqI5txWQIch3-BCki2bpw",
@@ -22,7 +22,7 @@ try:
         vapid_private_key="f4oitY9xPckwPugvhvcubOMHaz-Wf1XM2IaPaLdN8lM",
         vapid_claims={
             "sub": "https://joynal.dev",
-        }
+        },
     )
 
 except WebPushException as ex:
@@ -30,8 +30,9 @@ except WebPushException as ex:
     # Mozilla returns additional information in the body of the response.
     if ex.response and ex.response.json():
         extra = ex.response.json()
-        print("Remote service replied with a {}:{}, {}",
-              extra.code,
-              extra.errno,
-              extra.message
-              )
+        print(
+            "Remote service replied with a {}:{}, {}",
+            extra.code,
+            extra.errno,
+            extra.message,
+        )

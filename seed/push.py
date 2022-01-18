@@ -16,11 +16,18 @@ async def main():
     db_client = DBClient(settings.database)
     await db_client.init()
     push_repo = PushRepoSql(db_client)
-    options = {
-        "body": "Ignore it, it's a test notification",
-        "icon": "https://avatars3.githubusercontent.com/u/6458212",
+
+    push = {
+        "site_id": args.site_id,
+        "title": "I came from demo",
+        "launch_url": "https://joynal.dev",
+        "options": {
+            "body": "Ignore it, it's a test notification",
+            "icon": "https://avatars3.githubusercontent.com/u/6458212",
+        },
     }
-    res = await push_repo.create(entity=(args.site_id, "I came from demo", "https://joynal.dev", options))
+
+    res = await push_repo.create(entity=push)
     print("push created", res)
 
 

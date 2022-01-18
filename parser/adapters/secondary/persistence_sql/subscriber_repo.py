@@ -13,13 +13,13 @@ class SubscriberRepoSql(BaseRepoSql):
         super().__init__(db_client.pool)
         self.query = {
             "create": create_subscriber,
-            'fetch': fetch_subscriber,
-            "fetch_stream": fetch_stream
+            "fetch": fetch_subscriber,
+            "fetch_stream": fetch_stream,
         }
 
     async def get_all(self, *, site_id: UUID, callback):
         async with self.pool.acquire() as conn:
-            stmt = await conn.prepare(self.get_query('fetch_stream'))
+            stmt = await conn.prepare(self.get_query("fetch_stream"))
             async with conn.transaction():
                 async for record in stmt.cursor(site_id):
                     subscriber = from_dict(data_class=Subscriber, data=record)

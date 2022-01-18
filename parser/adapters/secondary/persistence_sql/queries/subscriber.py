@@ -1,17 +1,17 @@
 create_subscriber = """
 INSERT INTO
-    subscriber (site_id, endpoint)
+    subscriber (site_id, subscription_info)
 VALUES 
-    ($1, $2) RETURNING id,
+    (%(site_id)s, %(subscription_info)s) RETURNING id,
     site_id,
     subscribed,
-    endpoint;
+    subscription_info;
 """
 
 fetch_subscriber = """
 SELECT *
 FROM subscriber
-WHERE id = $1;
+WHERE id=$1;
 """
 
 fetch_stream = """

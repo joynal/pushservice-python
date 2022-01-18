@@ -18,7 +18,9 @@ if not settings.database.connection_string:
     exit(0)
 
 # replace `postgres` with `postgresql`
-connection_string = settings.database.connection_string.replace("postgres://", "postgresql://", 1)
+connection_string = settings.database.connection_string.replace(
+    "postgres://", "postgresql://", 1
+)
 config.set_main_option("sqlalchemy.url", connection_string)
 
 # Interpret the config file for Python logging.
@@ -76,9 +78,7 @@ def run_migrations_online():
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

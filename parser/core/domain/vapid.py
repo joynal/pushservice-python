@@ -11,6 +11,10 @@ def generate_vapid_keypair():
     vk = pk.get_verifying_key()
 
     return {
-        'private_key': base64.urlsafe_b64encode(pk.to_string()).strip("=".encode()).decode(),
-        'public_key': base64.urlsafe_b64encode(f"\x04{vk.to_string()}".encode()).strip("=".encode()).decode(),
+        "private_key": base64.urlsafe_b64encode(pk.to_string())
+        .strip("=".encode())
+        .decode(),
+        "public_key": base64.urlsafe_b64encode(f"\x04{vk.to_string()}".encode())
+        .strip("=".encode())
+        .decode(),
     }

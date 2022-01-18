@@ -11,7 +11,7 @@ from parser.settings import Settings, dump_settings
 
 class Application:
     """
-    Application object - configure, compose, then run your application 
+    Application object - configure, compose, then run your application
     """
 
     stoppables: List[Runnable]

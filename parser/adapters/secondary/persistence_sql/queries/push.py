@@ -2,7 +2,7 @@ create_push = """
 INSERT INTO
     push (site_id, title, launch_url, options)
 VALUES
-    ($1, $2, $3, $4) RETURNING id,
+    (%(site_id)s, %(title)s, %(launch_url)s, %(options)s) RETURNING id,
     site_id,
     title,
     launch_url,
@@ -12,15 +12,15 @@ VALUES
 fetch_push = """
 SELECT *
 FROM push
-WHERE id = $1;
+WHERE id=$1;
 """
 
 update_push = """
 UPDATE push
 SET {}
-WHERE id=%(id)s
+WHERE id=%(id)s::uuid;
 """
 
 delete_push = """
-DELETE FROM push WHERE %(id)s
+DELETE FROM push WHERE id=$1;
 """

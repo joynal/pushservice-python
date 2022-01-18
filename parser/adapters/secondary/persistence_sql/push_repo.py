@@ -7,8 +7,8 @@ class PushRepoSql(BaseRepoSql):
     def __init__(self, db_client: DBClient):
         super().__init__(db_client.pool)
         self.query = {
-            'create': create_push,
-            'fetch': fetch_push,
-            'update': update_push,
-            'delete': delete_push,
+            "create": create_push,
+            "fetch": fetch_push,
+            "update": update_push,
+            "delete": delete_push,
         }
