@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 import asyncpg
 
 from parser.core.domain.jsonb import jsonb_encoder, jsonb_decoder

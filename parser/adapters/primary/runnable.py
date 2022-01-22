@@ -1,13 +1,12 @@
 from abc import ABC
 from abc import abstractmethod
-from threading import Thread
 
 
-class Runnable(ABC, Thread):
+class Runnable(ABC):
     @abstractmethod
     def run(self) -> None:
         """
-        This method is intented as the entry point for
+        This method is intended as the entry point for
         starting and running a primary adapter.
         """
         raise NotImplementedError()

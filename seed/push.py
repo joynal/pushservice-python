@@ -22,7 +22,7 @@ async def main():
         "title": "I came from demo",
         "launch_url": "https://joynal.dev",
         "options": {
-            "body": "Ignore it, it's a test notification",
+            "body": "Ignore it, it's a test push",
             "icon": "https://avatars3.githubusercontent.com/u/6458212",
         },
     }

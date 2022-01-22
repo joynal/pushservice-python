@@ -30,13 +30,13 @@ NewPush = tuple[UUID, str, str, dict]
 
 
 @dataclass
-class NotificationOptions:
+class PushOptions:
     body: str
     icon: str
 
 
 @dataclass
-class Notification:
+class Push:
     id: UUID
     site_id: UUID
     title: str
@@ -44,16 +44,20 @@ class Notification:
     launch_url: str
     priority: str
     time_to_live: int
-    options: NotificationOptions
+    options: PushOptions
+
+
+@dataclass
+class PushWithKey(Push):
+    vapid_private_key: str
 
 
 @dataclass
 class WebpushData:
     title: str
-    status: str
     launch_url: str
     priority: str
-    options: NotificationOptions
+    options: PushOptions
 
 
 @dataclass

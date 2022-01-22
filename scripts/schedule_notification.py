@@ -4,18 +4,16 @@ import json
 from dataclasses import asdict
 from uuid import UUID
 
-from dacite import from_dict
-
 from parser.adapters.secondary.kafka_producer.client import KafkaPublisher
 from parser.adapters.secondary.persistence_sql.client import DBClient
 from parser.adapters.secondary.persistence_sql.push_repo import PushRepoSql
 from parser.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
-from parser.core.domain.entities import Site, Notification
+from parser.core.domain.entities import Site, Push
 from parser.core.domain.uuid_encoder import UUIDEncoder
 from parser.settings import load
 
-parser = argparse.ArgumentParser(description="schedule notification script")
-parser.add_argument("-n", "--notification-id", help="Notification id", required=True)
+parser = argparse.ArgumentParser(description="schedule push script")
+parser.add_argument("-n", "--push-id", help="Push id", required=True)
 args = parser.parse_args()
 
 settings = load("./settings.yaml")
@@ -27,23 +25,18 @@ async def main():
     push_repo = PushRepoSql(db_client)
     site_repo = SiteRepoSql(db_client)
 
-    # get notification and site then prepare message
-    res_notification = await push_repo.get_by_id(entity_id=UUID(args.notification_id))
-    notification = from_dict(
-        data_class=Notification,
-        data={field: value for field, value in res_notification.items()},
-    )
-    res_site = await site_repo.get_by_id(entity_id=notification.site_id)
-    site = from_dict(
-        data_class=Site, data={field: value for field, value in res_site.items()}
-    )
-    notification.vapid_private_key = site.private_key
+    # get push and site then prepare message
+    push = await push_repo.get_by_id(entity_id=UUID(args.push_id), data_class=Push)
+    site = await site_repo.get_by_id(entity_id=push.site_id, data_class=Site)
 
     # update database status to processing
-    await push_repo.update(entity_id=notification.id, update_data={"status": "RUNNING"})
+    await push_repo.update(entity_id=push.id, update_data={"status": "RUNNING"})
 
-    # send this data to raw-notification
-    encode_data = json.dumps(asdict(notification), cls=UUIDEncoder).encode("utf-8")
+    payload = asdict(push)
+    payload["vapid_private_key"] = site.private_key
+
+    # send this data to raw-push
+    encode_data = json.dumps(payload, cls=UUIDEncoder).encode("utf-8")
     producer = KafkaPublisher(settings.kafka)
     producer.publish(settings.kafka.topic, encode_data)
 

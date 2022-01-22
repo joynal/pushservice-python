@@ -1,5 +1,8 @@
 from uuid import UUID
 
+from dacite import from_dict
+from dataclasses import dataclass
+
 from parser.core.domain.sql import dict_to_sql, pyformat_to_sql, pyformat_to_sql_many
 from parser.core.ports.secondary.curd import CrudRepo
 
@@ -15,10 +18,13 @@ class BaseRepoSql(CrudRepo):
             res = await conn.fetchrow(query, *values)
             return res
 
-    async def get_by_id(self, *, entity_id: UUID):
+    async def get_by_id(self, *, entity_id: UUID, data_class=dataclass):
         async with self.pool.acquire() as conn:
             res = await conn.fetchrow(self.get_query("fetch"), entity_id)
-            return res
+            return from_dict(
+                data_class=data_class,
+                data={field: value for field, value in res.items()},
+            )
 
     async def create_many(self, *, entity_list: list[dict]):
         async with self.pool.acquire() as conn:

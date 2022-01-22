@@ -8,7 +8,7 @@ database:
 kafka:
   brokers:
     - localhost:9393
-  topic: "pushservice.notifications"
+  topic: "pushservice.pushs"
   group_id: "ParserConsumerGroup"
   service_name: "ParserConsumer"
 

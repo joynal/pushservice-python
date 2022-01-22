@@ -25,7 +25,7 @@ class DatabaseSettings:
 class KafkaSettings:
     enabled: bool = True
     brokers: list[str] = field(default_factory=list["localhost:9292"])
-    topic: str = "pushservice.notifications"
+    topic: str = "pushservice.pushs"
     group_id: str = "ParserConsumerGroup"
     service_name: str = "ParserConsumer"
     # connection_timeout: int = 365
@@ -51,5 +51,5 @@ def load(path):
         return settings
 
 
-def dump_settings(settings: Settings) -> Settings:
+def dump_settings(settings: Settings):
     return yaml.dump(asdict(settings))

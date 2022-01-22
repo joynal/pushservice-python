@@ -5,7 +5,7 @@ from parser.adapters.primary.runnable import Runnable
 from parser.adapters.primary.subscriber_kafka.runner import SubscriberKafka
 from parser.adapters.secondary.persistence_sql.client import DBClient
 from parser.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
-from parser.core.use_cases.notification import NotificationParser
+from parser.core.use_cases.push import PushParser
 from parser.settings import Settings, dump_settings
 
 
@@ -31,13 +31,10 @@ class Application:
 
         if self.settings.kafka.enabled:
             subscriber_repo = SubscriberRepoSql(db_client)
-            parser = NotificationParser(subscriber_repo)
+            parser = PushParser(self.settings.kafka, subscriber_repo)
             parser_stream = SubscriberKafka(self.settings.kafka, parser)
-            parser_stream.start()
+            await parser_stream.run()
             self.stoppables.append(parser_stream)
-
-        for x in self.stoppables:
-            x.join()
 
     def stop(self) -> None:
         for x in self.stoppables:

@@ -3,9 +3,9 @@ Todos:
 - kafka producer class
 - kafka consumer class
 - kafka consumber reconnect strategy
-- notification parser
-- notification sender
-- schedule notification script
+- push parser
+- push sender
+- schedule push script
 - test
 - add schema test
 - documentation
@@ -14,6 +14,8 @@ Todos:
 - kafka docker authenticaiton
 - github CI setup for test
 - publish to github
+- implement data transfer object
+- data transfer object
 
 
 
