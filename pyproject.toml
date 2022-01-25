@@ -1,0 +1,121 @@
+[tool.black]
+line-length = 88
+target_version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | build
+    | dist
+    | tmp
+  )/
+)
+'''
+
+[tool.isort]
+# Should be: 88 - 1
+line_length = 87
+sections=['FUTURE','STDLIB','THIRDPARTY','FIRSTPARTY','LOCALFOLDER']
+default_section='THIRDPARTY'
+skip_gitignore = true
+skip = ['.tox','build','.venv','.mypy_cache']
+indent = '    '
+known_first_party = ['pushservice','parser','sender','scripts','seeds','migration']
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+force_grid_wrap = 0
+ensure_newline_before_comments = true
+
+[tool.flakehell]
+show-source = true
+show-statistic = true
+doctests = true
+accept-encodings = 'utf-8'
+enable-extensions = 'G'
+dictionaries=['en_US','python','technical']
+
+# Flake plugins:
+max_line_length = 88
+i_control_code = true
+i_dont_control_code = false
+radon_max_cc = 10
+radon_show_closures = true
+radon_no_assert = true
+max_complexity = 6
+max_cognitive_average = 10
+max_imports = 15
+max_arguments = 8
+max_methods = 10
+max_module_members = 15
+max_local_variables = 6
+isort_show_traceback = true
+inline_quotes = 'double'
+docstring_convention='google'
+allowed_domain_names=['value', 'result', 'item', 'items']
+
+exclude = ['.git', '.tox', 'build', 'dist',
+          '.venv', '.idea', '.github', "*.feature",
+          'tmp','__pycache__','.mypy_cache','lsp',]
+
+[tool.flakehell.plugins]
+pycodestyle = ['+*',
+# This conflicts with black formatting: allow new way of formatting of binary operators
+'-W503', "-E203",
+]
+pyflakes = ['+*']
+'flake8-*' = ['+*']
+flake8-commas = ['+*',
+# Only use comma's settings for Python 3.6+
+'-C812', '-C813', '-C814', '-C815', '-C816'
+]
+flake8-quotes = ['+*']
+flake8-black = ['+*']
+flake8-blind-except = ['-*']
+flake8-return = ['+*']
+flake8-logging-format = ['+*']
+flake8-rst-docstrings = ["+*",
+# Relax the rules for Google Python Style comments
+"-RST201", "-RST203", "-RST301"
+]
+flake8-darglint = ["+*"]
+mccabe = ['+*']
+pep8-naming = ['+*']
+wemake-python-styleguide = ['+*',
+# https://github.com/wemake-services/wemake-python-styleguide/issues/1304
+'-WPS323',
+# Allow classes without base class
+'-WPS306',
+# Allow use of `f` strings
+'-WPS305',
+# TODO: String constant overuse
+'-WPS226',
+]
+
+
+# Relaxed rules for tests
+[tool.flakehell.exceptions.'**/*_test.py']
+wemake-python-styleguide = ['-WPS202', '-WPS118', '-WPS211',
+'-WPS432', '-WPS214', '-WPS213', '-WPS22', '-WPS204',
+# Allow higher number of local variables
+'-WPS210',
+# String constant overuse
+'-WPS226'
+]
+
+
+pep8-naming=['-N806']
+pycodestyle=['-E501', '-E722', '-W605','-E713']
+flake8-logging-format=['-G002', '-G003', '-G010', '-G200']
+flake8-commas=['-C812']
+flake8-string-format=["-P101"]
+flake8-docstrings=['-D100', '-D102', '-D107', '-D202', '-D209']
+flake8-bugbear=['-B001', '-B006', '-B007']
+mccabe=['-C901']
+flake8-return=['-R504']
