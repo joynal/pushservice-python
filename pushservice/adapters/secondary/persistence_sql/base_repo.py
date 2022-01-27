@@ -1,10 +1,10 @@
+from dataclasses import dataclass
 from uuid import UUID
 
 from dacite import from_dict
-from dataclasses import dataclass
 
-from parser.core.domain.sql import dict_to_sql, pyformat_to_sql, pyformat_to_sql_many
-from parser.core.ports.secondary.curd import CrudRepo
+from pushservice.core.domain.sql import dict_to_sql, pyformat_to_sql, pyformat_to_sql_many
+from pushservice.core.ports.secondary.curd import CrudRepo
 
 
 class BaseRepoSql(CrudRepo):

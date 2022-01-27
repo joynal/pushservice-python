@@ -7,8 +7,14 @@ database:
 
 kafka:
   brokers:
-    - localhost:9393
-  topic: "pushservice.pushs"
+    - localhost:9093
+
+parser:
+  topic: "raw-push"
   group_id: "ParserConsumerGroup"
   service_name: "ParserConsumer"
 
+sender:
+  topic: "send-push"
+  group_id: "SenderConsumerGroup"
+  service_name: "SenderConsumer"

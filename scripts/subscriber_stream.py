@@ -1,9 +1,9 @@
 import asyncio
 from uuid import UUID
 
-from parser.adapters.secondary.persistence_sql.client import DBClient
-from parser.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
-from parser.settings import load
+from pushservice.settings import load
+from pushservice.adapters.secondary.persistence_sql import DBClient
+from pushservice.adapters.secondary.persistence_sql import SubscriberRepoSql
 
 settings = load("./settings.yaml")
 

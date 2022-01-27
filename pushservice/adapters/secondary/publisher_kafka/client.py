@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 
-from parser.settings import KafkaSettings
+from pushservice.settings import KafkaSettings
 
 
 def on_send_success(record_metadata):

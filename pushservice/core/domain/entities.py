@@ -62,6 +62,7 @@ class WebpushData:
 
 @dataclass
 class WebpushPayload:
+    push_id: UUID
     subscription_info: dict
     data: WebpushData
     ttl: int

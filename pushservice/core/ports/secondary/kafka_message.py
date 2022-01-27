@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
-from parser.core.domain.entities import Push
+from pushservice.core.domain.entities import Push
 
 
-class ProcessPush(ABC):
+class KafkaMessage(ABC):
     @abstractmethod
     def process(self, push: Push):
         raise NotImplementedError()

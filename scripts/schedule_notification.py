@@ -4,13 +4,13 @@ import json
 from dataclasses import asdict
 from uuid import UUID
 
-from parser.adapters.secondary.kafka_producer.client import KafkaPublisher
-from parser.adapters.secondary.persistence_sql.client import DBClient
-from parser.adapters.secondary.persistence_sql.push_repo import PushRepoSql
-from parser.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
-from parser.core.domain.entities import Site, Push
-from parser.core.domain.uuid_encoder import UUIDEncoder
-from parser.settings import load
+from pushservice.settings import load
+from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
+from pushservice.adapters.secondary.persistence_sql.client import DBClient
+from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
+from pushservice.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
+from pushservice.core.domain.entities import Site, Push
+from pushservice.core.domain.uuid_encoder import UUIDEncoder
 
 parser = argparse.ArgumentParser(description="schedule push script")
 parser.add_argument("-n", "--push-id", help="Push id", required=True)
@@ -38,7 +38,7 @@ async def main():
     # send this data to raw-push
     encode_data = json.dumps(payload, cls=UUIDEncoder).encode("utf-8")
     producer = KafkaPublisher(settings.kafka)
-    producer.publish(settings.kafka.topic, encode_data)
+    producer.publish(settings.parser.topic, encode_data)
 
 
 if __name__ == "__main__":

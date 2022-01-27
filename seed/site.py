@@ -1,9 +1,9 @@
 import asyncio
 
-from parser.adapters.secondary.persistence_sql.client import DBClient
-from parser.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
-from parser.core.domain.vapid import generate_vapid_keypair
-from parser.settings import load
+from pushservice.settings import load
+from pushservice.adapters.secondary.persistence_sql.client import DBClient
+from pushservice.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
+from pushservice.core.domain.vapid import generate_vapid_keypair
 
 settings = load("./settings.yaml")
 

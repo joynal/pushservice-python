@@ -1,8 +1,8 @@
 import asyncio
 import logging
 
-from parser.app import Application
-from parser.settings import load
+from sender.app import Application
+from pushservice.settings import load
 
 
 def setup_logging(log_level):

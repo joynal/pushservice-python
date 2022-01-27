@@ -15,7 +15,6 @@ Todos:
 - github CI setup for test
 - publish to github
 - implement data transfer object
-- data transfer object
 
 
 

@@ -2,7 +2,7 @@ from uuid import UUID
 
 from dacite import from_dict
 
-from parser.core.domain.entities import Subscriber
+from pushservice.core.domain.entities import Subscriber
 from .base_repo import BaseRepoSql
 from .client import DBClient
 from .queries.subscriber import create_subscriber, fetch_stream, fetch_subscriber

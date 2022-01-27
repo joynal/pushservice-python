@@ -1,4 +1,3 @@
-# Setup jsonb encoder/decoder
 import json
 
 

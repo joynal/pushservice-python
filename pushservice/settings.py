@@ -1,8 +1,8 @@
 import logging
-from dacite import from_dict
 from dataclasses import dataclass, asdict, field
 
 import yaml
+from dacite import from_dict
 
 logger = logging.getLogger()
 
@@ -22,14 +22,16 @@ class DatabaseSettings:
 
 
 @dataclass
+class TopicSettings:
+    topic: str
+    group_id: str
+    service_name: str
+
+
+@dataclass
 class KafkaSettings:
     enabled: bool = True
     brokers: list[str] = field(default_factory=list["localhost:9292"])
-    topic: str = "pushservice.pushs"
-    group_id: str = "ParserConsumerGroup"
-    service_name: str = "ParserConsumer"
-    # connection_timeout: int = 365
-    # socket_timeout: int = 2400
     heartbeat: int = 60
 
     def to_dict(self):
@@ -41,6 +43,8 @@ class Settings:
     worker: WorkerSettings
     database: DatabaseSettings
     kafka: KafkaSettings
+    parser: TopicSettings
+    sender: TopicSettings
 
 
 def load(path):

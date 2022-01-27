@@ -1,6 +1,7 @@
 import logging
 from typing import List
 
+from pushservice.core.use_cases.push_sender import PushSender
 from pushservice.settings import Settings, dump_settings
 from pushservice.adapters.primary.runnable import Runnable
 from pushservice.adapters.primary.subscriber_kafka.runner import SubscriberKafka
@@ -19,7 +20,7 @@ class Application:
     stoppables: List[Runnable]
 
     def __init__(self, settings: Settings):
-        self.logger = logging.getLogger("Parser")
+        self.logger = logging.getLogger("Sender")
         self.settings = settings
         self.stoppables = []
 
@@ -33,11 +34,11 @@ class Application:
 
         if self.settings.kafka.enabled:
             subscriber_repo = SubscriberRepoSql(db_client)
-            parser = PushParser(self.settings, subscriber_repo)
+            sender = PushSender(subscriber_repo)
             parser_stream = SubscriberKafka(
                 kafka_settings=self.settings.kafka,
-                topic_settings=self.settings.parser,
-                callback=parser.process,
+                topic_settings=self.settings.sender,
+                callback=sender.process,
             )
             await parser_stream.run()
             self.stoppables.append(parser_stream)
