@@ -4,9 +4,9 @@ import math
 import random
 import secrets
 
-from pushservice.settings import load
 from pushservice.adapters.secondary.persistence_sql.client import DBClient
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
+from pushservice.settings import load
 
 parser = argparse.ArgumentParser(description="Subscriber generator script")
 parser.add_argument("-s", "--site-id", help="Site id for subscribers", required=True)

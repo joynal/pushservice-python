@@ -1,9 +1,9 @@
 import argparse
 import asyncio
 
-from pushservice.settings import load
 from pushservice.adapters.secondary.persistence_sql.client import DBClient
 from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
+from pushservice.settings import load
 
 parser = argparse.ArgumentParser(description="Push generator script")
 parser.add_argument("-s", "--site-id", help="Site id for push", required=True)

@@ -25,7 +25,6 @@ class DatabaseSettings:
 class TopicSettings:
     topic: str
     group_id: str
-    service_name: str
 
 
 @dataclass

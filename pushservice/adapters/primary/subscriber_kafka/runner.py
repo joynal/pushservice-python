@@ -3,8 +3,8 @@ from typing import Callable
 
 from kafka import KafkaConsumer
 
-from pushservice.settings import KafkaSettings, TopicSettings
 from pushservice.adapters.primary.runnable import Runnable
+from pushservice.settings import KafkaSettings, TopicSettings
 
 
 class SubscriberKafka(Runnable):

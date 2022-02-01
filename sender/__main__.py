@@ -1,8 +1,8 @@
 import asyncio
 import logging
 
-from sender.app import Application
 from pushservice.settings import load
+from sender.app import Application
 
 
 def setup_logging(log_level):

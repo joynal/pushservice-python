@@ -1,7 +1,7 @@
 import asyncpg
 
-from pushservice.settings import DatabaseSettings
 from pushservice.core.domain.jsonb import jsonb_encoder, jsonb_decoder
+from pushservice.settings import DatabaseSettings
 
 
 async def set_codec(conn):

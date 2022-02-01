@@ -4,13 +4,13 @@ import json
 from dataclasses import asdict
 from uuid import UUID
 
-from pushservice.settings import load
-from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
 from pushservice.adapters.secondary.persistence_sql.client import DBClient
 from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
 from pushservice.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
+from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
 from pushservice.core.domain.entities import Site, Push
 from pushservice.core.domain.uuid_encoder import UUIDEncoder
+from pushservice.settings import load
 
 parser = argparse.ArgumentParser(description="schedule push script")
 parser.add_argument("-n", "--push-id", help="Push id", required=True)

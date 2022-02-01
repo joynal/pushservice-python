@@ -15,19 +15,9 @@ class PushSender(KafkaMessage):
 
     async def process(self, message: ConsumerRecord):
         push_data = json.loads(message.value)
-        self.logger.info("received push", push_data)
         del push_data["push_id"]
 
         try:
             webpush(**push_data)
         except WebPushException as ex:
-            print("I'm sorry, Dave, but I can't do that: {}", repr(ex))
-            # Mozilla returns additional information in the body of the response.
-            if ex.response and ex.response.json():
-                extra = ex.response.json()
-                print(
-                    "Remote service replied with a {}:{}, {}",
-                    extra.code,
-                    extra.errno,
-                    extra.message,
-                )
+            self.logger.error(repr(ex))

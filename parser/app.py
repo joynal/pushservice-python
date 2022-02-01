@@ -1,7 +1,6 @@
 import logging
 from typing import List
 
-from pushservice.settings import Settings, dump_settings
 from pushservice.adapters.primary.runnable import Runnable
 from pushservice.adapters.primary.subscriber_kafka.runner import SubscriberKafka
 from pushservice.adapters.secondary.persistence_sql.client import DBClient
@@ -9,6 +8,7 @@ from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
 from pushservice.core.use_cases.push_parser import PushParser
+from pushservice.settings import Settings, dump_settings
 
 
 class Application:

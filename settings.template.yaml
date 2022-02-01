@@ -1,9 +1,9 @@
 worker:
-  log_level: info
+  log_level: INFO
   debug: true
 
 database:
-  connection_string: "postgres://test_user:password@localhost:5400/pushservice-db"
+  connection_string: "postgres://test_user:password@localhost:5400/pushservice_db"
 
 kafka:
   brokers:
@@ -12,9 +12,7 @@ kafka:
 parser:
   topic: "raw-push"
   group_id: "ParserConsumerGroup"
-  service_name: "ParserConsumer"
 
 sender:
   topic: "send-push"
   group_id: "SenderConsumerGroup"
-  service_name: "SenderConsumer"

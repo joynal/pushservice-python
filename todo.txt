@@ -1,11 +1,5 @@
 Todos:
-- subscriber stream class
-- kafka producer class
-- kafka consumer class
-- kafka consumber reconnect strategy
-- push parser
-- push sender
-- schedule push script
+- fix consumer group joining
 - test
 - add schema test
 - documentation
