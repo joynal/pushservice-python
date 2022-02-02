@@ -3,7 +3,7 @@ from typing import List
 
 from pushservice.adapters.primary.runnable import Runnable
 from pushservice.adapters.primary.subscriber_kafka.runner import SubscriberKafka
-from pushservice.adapters.secondary.persistence_sql.client import DBClient
+from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
@@ -28,11 +28,10 @@ class Application:
             "Applied configuration:\n" + dump_settings(self.settings),
         )
 
-        db_client = DBClient(self.settings.database)
-        await db_client.init()
+        pool = await create_connection_pool(self.settings.database)
 
         if self.settings.kafka.enabled:
-            subscriber_repo = SubscriberRepoSql(db_client)
+            subscriber_repo = SubscriberRepoSql(pool)
             parser = PushParser(self.settings, subscriber_repo)
             parser_stream = SubscriberKafka(
                 kafka_settings=self.settings.kafka,

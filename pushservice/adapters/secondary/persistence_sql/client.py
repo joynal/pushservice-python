@@ -1,7 +1,11 @@
+import logging
+
 import asyncpg
+from asyncpg import Pool
 
 from pushservice.core.domain.jsonb import jsonb_encoder, jsonb_decoder
-from pushservice.settings import DatabaseSettings
+
+logger = logging.getLogger("DB_CLIENT")
 
 
 async def set_codec(conn):
@@ -14,19 +18,15 @@ async def set_codec(conn):
     )
 
 
-class DBClient:
-    def __init__(self, settings: DatabaseSettings):
-        self.pool = None
-        self.settings = settings
-
-    async def init(self):
-        try:
-            self.pool = await asyncpg.create_pool(
-                dsn=self.settings.connection_string,
-                min_size=self.settings.pool_min_size,
-                max_size=self.settings.pool_max_size,
-                max_queries=self.settings.max_queries,
-                init=set_codec,
-            )
-        except Exception as exp:
-            print("Initialize error: ", exp)
+async def create_connection_pool(settings) -> Pool:
+    try:
+        pool = await asyncpg.create_pool(
+            dsn=settings.connection_string,
+            min_size=settings.pool_min_size,
+            max_size=settings.pool_max_size,
+            max_queries=settings.max_queries,
+            init=set_codec,
+        )
+        return pool
+    except Exception as exp:
+        logger.error("Initialize error: ", repr(exp))

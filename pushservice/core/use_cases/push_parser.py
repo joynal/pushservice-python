@@ -7,7 +7,9 @@ import dacite
 from dacite import from_dict
 from kafka.consumer.fetcher import ConsumerRecord
 
-from pushservice.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
+from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
+    SubscriberRepoSql,
+)
 from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
 from pushservice.core.domain.entities import Subscriber, PushWithKey
 from pushservice.core.domain.uuid_encoder import UUIDEncoder
@@ -33,12 +35,14 @@ class PushParser(KafkaMessage):
                 "vapid_claims": {
                     "sub": "https://joynal.dev",
                 },
-                "data": json.dumps({
-                    "title": push.title,
-                    "launch_url": push.launch_url,
-                    "priority": push.priority,
-                    "options": asdict(push.options),
-                }),
+                "data": json.dumps(
+                    {
+                        "title": push.title,
+                        "launch_url": push.launch_url,
+                        "priority": push.priority,
+                        "options": asdict(push.options),
+                    }
+                ),
             }
 
             encode_data = json.dumps(webpush_payload, cls=UUIDEncoder).encode("utf-8")

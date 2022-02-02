@@ -9,11 +9,11 @@ from pushservice.settings import KafkaSettings, TopicSettings
 
 class SubscriberKafka(Runnable):
     def __init__(
-            self,
-            *,
-            kafka_settings: KafkaSettings,
-            topic_settings: TopicSettings,
-            callback: Callable,
+        self,
+        *,
+        kafka_settings: KafkaSettings,
+        topic_settings: TopicSettings,
+        callback: Callable,
     ):
         super().__init__()
         self.event_loop = None

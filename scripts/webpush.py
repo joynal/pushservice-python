@@ -9,21 +9,23 @@ try:
             "expirationTime": None,
             "keys": {
                 "p256dh": "BH7z6g2qF6DHKPoJrR1C14ipaT2nhdOY-FRZEkIM1XcCrWjyyZyyuaUg-BBPSlk2AI5-CYoeH7b0iOtmYGyTSYA",
-                "auth": "8JKtxuSPDrHEoNrYqUewHQ"
-            }
+                "auth": "8JKtxuSPDrHEoNrYqUewHQ",
+            },
         },
         "ttl": 259200,
         "vapid_private_key": "f4oitY9xPckwPugvhvcubOMHaz-Wf1XM2IaPaLdN8lM",
         "vapid_claims": {"sub": "https://joynal.dev"},
-        "data": json.dumps({
-            "title": "I came from demo",
-            "launch_url": "https://joynal.dev",
-            "priority": "normal",
-            "options": {
-                "body": "Ignore it, it's a test notification",
-                "icon": "https://avatars3.githubusercontent.com/u/6458212",
-            },
-        }),
+        "data": json.dumps(
+            {
+                "title": "I came from demo",
+                "launch_url": "https://joynal.dev",
+                "priority": "normal",
+                "options": {
+                    "body": "Ignore it, it's a test notification",
+                    "icon": "https://avatars3.githubusercontent.com/u/6458212",
+                },
+            }
+        ),
     }
 
     webpush(**push_data)

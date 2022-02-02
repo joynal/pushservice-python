@@ -1,7 +1,7 @@
 import argparse
 import asyncio
 
-from pushservice.adapters.secondary.persistence_sql.client import DBClient
+from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
 from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
 from pushservice.settings import load
 
@@ -13,9 +13,8 @@ settings = load("./settings.yaml")
 
 
 async def main():
-    db_client = DBClient(settings.database)
-    await db_client.init()
-    push_repo = PushRepoSql(db_client)
+    pool = await create_connection_pool(settings.database)
+    push_repo = PushRepoSql(pool)
 
     push = {
         "site_id": args.site_id,

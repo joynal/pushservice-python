@@ -4,8 +4,10 @@ import math
 import random
 import secrets
 
-from pushservice.adapters.secondary.persistence_sql.client import DBClient
-from pushservice.adapters.secondary.persistence_sql.subscriber_repo import SubscriberRepoSql
+from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
+from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
+    SubscriberRepoSql,
+)
 from pushservice.settings import load
 
 parser = argparse.ArgumentParser(description="Subscriber generator script")
@@ -36,9 +38,8 @@ def generate_endpoint():
 
 
 async def main():
-    db_client = DBClient(settings.database)
-    await db_client.init()
-    subscriber_repo = SubscriberRepoSql(db_client)
+    pool = await create_connection_pool(settings.database)
+    subscriber_repo = SubscriberRepoSql(pool)
     length = int(args.length)
     batch_size = int(args.batch_size)
     range_num = math.ceil(length / batch_size) or 1
