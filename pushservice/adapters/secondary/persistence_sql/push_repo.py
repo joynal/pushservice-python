@@ -1,7 +1,10 @@
 from asyncpg import Pool
 
 from .base_repo import BaseRepoSql
-from .queries.push import create_push, fetch_push, update_push, delete_push
+from .queries.push import create_push
+from .queries.push import delete_push
+from .queries.push import fetch_push
+from .queries.push import update_push
 
 
 class PushRepoSql(BaseRepoSql):

@@ -1,20 +1,20 @@
 import json
 import logging
 from dataclasses import asdict
+from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
+    SubscriberRepoSql,
+)
+from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
+from pushservice.core.domain.entities import PushWithKey
+from pushservice.core.domain.entities import Subscriber
+from pushservice.core.domain.uuid_encoder import UUIDEncoder
+from pushservice.core.ports.secondary.kafka_message import KafkaMessage
+from pushservice.settings import Settings
 from uuid import UUID
 
 import dacite
 from dacite import from_dict
 from kafka.consumer.fetcher import ConsumerRecord
-
-from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
-    SubscriberRepoSql,
-)
-from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
-from pushservice.core.domain.entities import Subscriber, PushWithKey
-from pushservice.core.domain.uuid_encoder import UUIDEncoder
-from pushservice.core.ports.secondary.kafka_message import KafkaMessage
-from pushservice.settings import Settings
 
 
 class PushParser(KafkaMessage):

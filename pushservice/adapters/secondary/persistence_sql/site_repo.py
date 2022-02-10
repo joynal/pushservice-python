@@ -1,7 +1,8 @@
 from asyncpg import Pool
 
 from .base_repo import BaseRepoSql
-from .queries.site import create_site, fetch_site
+from .queries.site import create_site
+from .queries.site import fetch_site
 
 
 class SiteRepoSql(BaseRepoSql):

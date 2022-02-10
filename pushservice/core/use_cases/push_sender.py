@@ -1,13 +1,13 @@
 import json
 import logging
-
-from kafka.consumer.fetcher import ConsumerRecord
-from pywebpush import webpush, WebPushException
-
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
 from pushservice.core.ports.secondary.kafka_message import KafkaMessage
+
+from kafka.consumer.fetcher import ConsumerRecord
+from pywebpush import webpush
+from pywebpush import WebPushException
 
 
 class PushSender(KafkaMessage):

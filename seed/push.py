@@ -1,7 +1,8 @@
 import argparse
 import asyncio
-
-from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
+from pushservice.adapters.secondary.persistence_sql.client import (
+    create_connection_pool,
+)
 from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
 from pushservice.settings import load
 

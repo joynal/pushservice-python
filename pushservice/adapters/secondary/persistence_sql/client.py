@@ -1,9 +1,9 @@
 import logging
+from pushservice.core.domain.jsonb import jsonb_decoder
+from pushservice.core.domain.jsonb import jsonb_encoder
 
 import asyncpg
 from asyncpg import Pool
-
-from pushservice.core.domain.jsonb import jsonb_encoder, jsonb_decoder
 
 logger = logging.getLogger("DB_CLIENT")
 

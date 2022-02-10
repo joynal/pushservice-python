@@ -1,6 +1,5 @@
 import asyncio
 import logging
-
 from parser.app import Application
 from pushservice.settings import load
 

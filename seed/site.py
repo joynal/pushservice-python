@@ -1,6 +1,7 @@
 import asyncio
-
-from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
+from pushservice.adapters.secondary.persistence_sql.client import (
+    create_connection_pool,
+)
 from pushservice.adapters.secondary.persistence_sql.site_repo import SiteRepoSql
 from pushservice.core.domain.vapid import generate_vapid_keypair
 from pushservice.settings import load

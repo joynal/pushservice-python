@@ -1,10 +1,10 @@
 import logging
+from pushservice.adapters.primary.runnable import Runnable
+from pushservice.settings import KafkaSettings
+from pushservice.settings import TopicSettings
 from typing import Callable
 
 from kafka import KafkaConsumer
-
-from pushservice.adapters.primary.runnable import Runnable
-from pushservice.settings import KafkaSettings, TopicSettings
 
 
 class SubscriberKafka(Runnable):

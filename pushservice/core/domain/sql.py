@@ -1,16 +1,18 @@
 import collections
 import itertools
+from typing import TypeVar
+
+T = TypeVar("T")
 
 
 def dict_to_sql(query: str, data: dict):
-    return query.format(", ".join("{}=%({})s".format(key, key) for key in data))
+    return query.format(", ".join(f"{key}=%({key})s" for key in data))
 
 
-# code borrowed from https://github.com/MagicStack/asyncpg/issues/9#issuecomment-600659015
-def pyformat_to_sql(query: str, named_args: dict[str, any]) -> tuple[str, list[any]]:
+def pyformat_to_sql(query: str, named_args: dict[str, T]) -> tuple[str, list[T]]:
     positional_generator = itertools.count(1)
-    positional_map = collections.defaultdict(
-        lambda: "${}".format(next(positional_generator))
+    positional_map: collections.defaultdict = collections.defaultdict(
+        lambda: f"${next(positional_generator)}"
     )
     formatted_query = query % positional_map
     positional_items = sorted(
@@ -22,12 +24,12 @@ def pyformat_to_sql(query: str, named_args: dict[str, any]) -> tuple[str, list[a
 
 
 def pyformat_to_sql_many(
-    query: str, named_args: list[dict[str, any]]
-) -> tuple[str, list[any]]:
+    query: str, named_args: list[dict[str, T]]
+) -> tuple[str, list[list[T]]]:
     arg_items = []
     positional_generator = itertools.count(1)
-    positional_map = collections.defaultdict(
-        lambda: "${}".format(next(positional_generator))
+    positional_map: collections.defaultdict = collections.defaultdict(
+        lambda: f"${next(positional_generator)}"
     )
     formatted_query = query % positional_map
 

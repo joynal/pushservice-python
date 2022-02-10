@@ -1,9 +1,12 @@
 import asyncio
-from uuid import UUID
-
-from pushservice.adapters.secondary.persistence_sql import DBClient
-from pushservice.adapters.secondary.persistence_sql import SubscriberRepoSql
+from pushservice.adapters.secondary.persistence_sql.client import (
+    create_connection_pool,
+)
+from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
+    SubscriberRepoSql,
+)
 from pushservice.settings import load
+from uuid import UUID
 
 settings = load("./settings.yaml")
 
@@ -13,9 +16,8 @@ async def process_subscriber(subscriber):
 
 
 async def main():
-    db_client = DBClient(settings.database)
-    await db_client.init()
-    subscriber_repo = SubscriberRepoSql(db_client)
+    pool = await create_connection_pool(settings.database)
+    subscriber_repo = SubscriberRepoSql(pool)
     await subscriber_repo.get_all(
         site_id=UUID("3f7230bd-af13-4b9b-a351-e00e7429bf78"),
         callback=process_subscriber,

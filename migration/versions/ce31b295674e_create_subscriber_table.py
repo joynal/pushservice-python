@@ -8,7 +8,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func, expression
+from sqlalchemy.sql import expression
+from sqlalchemy.sql import func
 
 # revision identifiers, used by Alembic.
 revision = "ce31b295674e"

@@ -1,5 +1,7 @@
 import logging
-from dataclasses import dataclass, asdict, field
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import field
 
 import yaml
 from dacite import from_dict
@@ -30,7 +32,7 @@ class TopicSettings:
 @dataclass
 class KafkaSettings:
     enabled: bool = True
-    brokers: list[str] = field(default_factory=list["localhost:9292"])
+    brokers: list[str] = field(default_factory=lambda: ["localhost:9292"])
     heartbeat: int = 60
 
     def to_dict(self):

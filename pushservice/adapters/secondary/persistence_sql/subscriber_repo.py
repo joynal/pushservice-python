@@ -1,11 +1,13 @@
+from pushservice.core.domain.entities import Subscriber
 from uuid import UUID
 
 from asyncpg import Pool
 from dacite import from_dict
 
-from pushservice.core.domain.entities import Subscriber
 from .base_repo import BaseRepoSql
-from .queries.subscriber import create_subscriber, fetch_stream, fetch_subscriber
+from .queries.subscriber import create_subscriber
+from .queries.subscriber import fetch_stream
+from .queries.subscriber import fetch_subscriber
 
 
 class SubscriberRepoSql(BaseRepoSql):

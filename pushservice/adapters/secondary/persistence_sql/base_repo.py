@@ -1,21 +1,18 @@
 from dataclasses import dataclass
+from pushservice.core.domain.sql import dict_to_sql
+from pushservice.core.domain.sql import pyformat_to_sql
+from pushservice.core.domain.sql import pyformat_to_sql_many
+from pushservice.core.ports.secondary.curd import CrudRepo
 from uuid import UUID
 
 from asyncpg import Pool
 from dacite import from_dict
 
-from pushservice.core.domain.sql import (
-    dict_to_sql,
-    pyformat_to_sql,
-    pyformat_to_sql_many,
-)
-from pushservice.core.ports.secondary.curd import CrudRepo
-
 
 class BaseRepoSql(CrudRepo):
     def __init__(self, pool: Pool):
         self.pool = pool
-        self.query = {}
+        self.query: dict = {}
 
     async def create(self, *, entity: dict):
         async with self.pool.acquire() as conn:

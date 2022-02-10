@@ -1,14 +1,19 @@
 import json
 
-from pywebpush import webpush, WebPushException
+from pywebpush import webpush
+from pywebpush import WebPushException
 
 try:
     push_data = {
         "subscription_info": {
-            "endpoint": "https://fcm.googleapis.com/fcm/send/d2Vj2HXnWS0:APA91bGW_si_MDp8h2g016QAZIZy3w5jecWOn4ZB1oWX3qESi9ROlxfNc_QHSb_ELpzOGE5dRGwaa2M2rPGzFDZC63OV5962BH3747qg1bw2GkMVv3_pkfUDqI5txWQIch3-BCki2bpw",
+            "endpoint": "https://fcm.googleapis.com/fcm/send/d2Vj2HXnWS0:"
+            + "APA91bGW_si_MDp8h2g016QAZIZy3w5jecWOn4ZB1oWX3qESi9ROlxfNc_QHSb_"
+            + "ELpzOGE5dRGwaa2M2rPGzFDZC63OV5962BH3747qg1bw2GkMVv3"
+            + "_pkfUDqI5txWQIch3-BCki2bpw",
             "expirationTime": None,
             "keys": {
-                "p256dh": "BH7z6g2qF6DHKPoJrR1C14ipaT2nhdOY-FRZEkIM1XcCrWjyyZyyuaUg-BBPSlk2AI5-CYoeH7b0iOtmYGyTSYA",
+                "p256dh": "BH7z6g2qF6DHKPoJrR1C14ipaT2nhdOY-"
+                + "FRZEkIM1XcCrWjyyZyyuaUg-BBPSlk2AI5-CYoeH7b0iOtmYGyTSYA",
                 "auth": "8JKtxuSPDrHEoNrYqUewHQ",
             },
         },

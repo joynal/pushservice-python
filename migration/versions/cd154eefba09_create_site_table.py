@@ -1,7 +1,7 @@
 """create site table
 
 Revision ID: cd154eefba09
-Revises: 
+Revises:
 
 """
 import sqlalchemy as sa

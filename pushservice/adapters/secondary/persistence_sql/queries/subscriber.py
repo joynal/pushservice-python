@@ -1,7 +1,7 @@
 create_subscriber = """
 INSERT INTO
     subscriber (site_id, subscription_info)
-VALUES 
+VALUES
     (%(site_id)s, %(subscription_info)s) RETURNING id,
     site_id,
     subscribed,

@@ -1,14 +1,15 @@
 import logging
-from typing import List
-
 from pushservice.adapters.primary.runnable import Runnable
 from pushservice.adapters.primary.subscriber_kafka.runner import SubscriberKafka
-from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
+from pushservice.adapters.secondary.persistence_sql.client import (
+    create_connection_pool,
+)
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
 from pushservice.core.use_cases.push_parser import PushParser
-from pushservice.settings import Settings, dump_settings
+from pushservice.settings import dump_settings
+from pushservice.settings import Settings
 
 
 class Application:
@@ -16,7 +17,7 @@ class Application:
     Application object - configure, compose, then run your application
     """
 
-    stoppables: List[Runnable]
+    stoppables: list[Runnable]
 
     def __init__(self, settings: Settings):
         self.logger = logging.getLogger("Parser")

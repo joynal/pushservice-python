@@ -36,7 +36,7 @@ through Ports.
 A primary adapter is a driving adapter which means it initiates application
 functionality (via a port that wraps a use case). Typically the initiation is
 driven by something like a http request or a message coming off an inbound queue.
- 
+
 A secondary Adapter is a driven adapter which means it is called out to from within
 the application core (via a port). An example would be pushing a message to a queue or doing
 CRUD on a database.
@@ -51,7 +51,7 @@ functionality that is consumed by the use cases.
 `/core/ports` are an abstract implementation (i.e. contract) of a set of
 functions/methods that do IO. Ports are defined in the application core but their
 concrete implementations are defined as adapters.
- 
+
 
 ##### Use Cases
 `/core/use_cases` (aka application services) are the almost-pure functional aspects
@@ -92,3 +92,31 @@ of the application can be expressed as an aggregate of the use cases.
 > alembic downgrade <revision_id>
 
 `NOTE`: You can do `alembic history` to a view a list of migrations in the project
+
+
+## Pre-commit hook:
+
+Install pre-commit:
+```bash
+pip install pre-commit
+```
+
+Initialized hooks:
+```bash
+pre-commit install
+```
+
+Update pre-commit config to latest:
+```
+pre-commit autoupdate
+```
+
+Run pre-commit without commit:
+```
+pre-commit run
+```
+
+Run pre-commit on all files:
+```
+pre-commit run --all-files
+```

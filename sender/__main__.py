@@ -1,6 +1,5 @@
 import asyncio
 import logging
-
 from pushservice.settings import load
 from sender.app import Application
 

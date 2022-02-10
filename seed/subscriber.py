@@ -3,8 +3,9 @@ import asyncio
 import math
 import random
 import secrets
-
-from pushservice.adapters.secondary.persistence_sql.client import create_connection_pool
+from pushservice.adapters.secondary.persistence_sql.client import (
+    create_connection_pool,
+)
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
@@ -26,12 +27,17 @@ def generate_endpoint():
         "https://fcm.googleapis.com/fcm/send/",
         "https://updates.push.services.mozilla.com/wpush/v2/",
     ]
-    subscriber_id = f"{secrets.token_urlsafe(10)}:APA91bESNu5qsIA484DSFWyuDLEgMHdAJf45IwMua9lknXrhAzQCrLcN-ZWfT8GE-_kxNR6MiCq1tfPr1aKWH8bVFNm6bmtDY-xHug-B76h6IqwemtB9tnlPsTqlr9A8ZcvA3dZzlxMc"
+    subscriber_id = (
+        secrets.token_urlsafe(10)
+        + ":APA91bESNu5qsIA484DSFWyuDLEgMHdAJf45IwMua9lknXrhAzQCrLcN-ZWfT8GE-_"
+        + "kxNR6MiCq1tfPr1aKWH8bVFNm6bmtDY-xHug-B76h6IqwemtB9tnlPsTqlr9A8ZcvA3dZzlxMc"
+    )
     return {
         "endpoint": random.choice(push_urls) + subscriber_id,
         "expirationTime": None,
         "keys": {
-            "p256dh": "BHk1DzprVgT26pIBTc3gsm-xE1m-DZzZcn_xAnvEpGKBMkja3V5rQsFQuQ7wlJV6I0A2P5LVHtjhp7lYZPsoQ8E",
+            "p256dh": "BHk1DzprVgT26pIBTc3gsm-xE1m-DZzZcn_"
+            + "xAnvEpGKBMkja3V5rQsFQuQ7wlJV6I0A2P5LVHtjhp7lYZPsoQ8E",
             "auth": "mrLLfPc_dIlwsO521ix1bQ",
         },
     }
