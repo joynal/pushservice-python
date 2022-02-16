@@ -13,6 +13,7 @@ kafka-python = "*"
 dacite = "==1.6.0"
 sqlalchemy = "==1.4.29"
 pywebpush = "*"
+pytest-alembic = "*"
 
 [dev-packages]
 
