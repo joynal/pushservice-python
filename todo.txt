@@ -1,4 +1,7 @@
 Todos:
+- add monitoring
+- add REST API
+- add gRPC API
 - fix consumer group joining
 - test
 - add schema test
@@ -8,6 +11,7 @@ Todos:
 - kafka docker authenticaiton
 - github CI setup for test
 - publish to github
+- set local debugging and reload for web server
 
 
 

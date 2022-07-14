@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from parser.app import Application
-from pushservice.settings import load
+from pushservice.settings import load_settings
 
 
 def setup_logging(log_level):
@@ -16,9 +16,9 @@ def setup_logging(log_level):
 
 
 async def main():
-    settings = load("./settings.yaml")
+    settings = load_settings("./settings.yaml")
 
-    setup_logging(log_level=settings.worker.log_level)
+    setup_logging(log_level=settings.monitor.log_level)
     app = Application(settings=settings)
 
     try:

@@ -14,8 +14,13 @@ dacite = "==1.6.0"
 sqlalchemy = "==1.4.29"
 pywebpush = "*"
 pytest-alembic = "*"
+rich = "*"
+fastapi = "*"
+starlette = "*"
+uvicorn = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.10"
