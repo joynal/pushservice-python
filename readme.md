@@ -1,20 +1,12 @@
-### Create a topic:
+# Push Notification Service
 
-```bash
-docker exec -it kafka sh -c "/opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9093 --replication-factor 1 --partitions 3 --topic raw-push"
-```
-
-
-
-
-
-# python-app-template
-The python-app-template is a templated application structure that can be used
+Sample application structure that can be used
 for all new and existing (with a refactor) applications. The structure is based
 on Clean Architecture (aka Ports & Adapters, Onion Architecture, Hexagonal
 Architecture).
 
 ### Directory Structure
+
 The top level structure includes:
 * docs - where all documentation should go including diagrams, adrs, etc.
 * modules - where git submodules are put if they are used
@@ -64,10 +56,12 @@ of the application can be expressed as an aggregate of the use cases.
 
 
 ### Responsibilities of `__main__.py`
+
 `__main__` is the application entry point. It's only repsonsibilites are to load and log the app settings and call `app.py`.
 
 
 ### Responsibilities of `app.py`
+
 `app.py` is the main application class. It's repsonsibilites are to:
 * Setup monitoring, including:
     - logging
@@ -82,9 +76,11 @@ of the application can be expressed as an aggregate of the use cases.
 
 
 ## Runningal
+
 > alembic upgrade head
 
 ### Downgrading
+
 - To remove all migrations done do:
 > alembic downgrade base
 
@@ -93,30 +89,40 @@ of the application can be expressed as an aggregate of the use cases.
 
 `NOTE`: You can do `alembic history` to a view a list of migrations in the project
 
-
-## Pre-commit hook:
+## Pre-commit hook
 
 Install pre-commit:
+
 ```bash
 pip install pre-commit
 ```
 
 Initialized hooks:
+
 ```bash
 pre-commit install
 ```
 
 Update pre-commit config to latest:
-```
+
+```bash
 pre-commit autoupdate
 ```
 
 Run pre-commit without commit:
-```
+
+```bash
 pre-commit run
 ```
 
 Run pre-commit on all files:
-```
+
+```bash
 pre-commit run --all-files
+```
+
+## Create a topic
+
+```bash
+docker exec -it kafka sh -c "/opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9093 --replication-factor 1 --partitions 3 --topic raw-push"
 ```
