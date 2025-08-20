@@ -6,4 +6,4 @@ from pytest_alembic.tests import test_upgrade  # noqa: F401
 
 
 def test_all_models_register_on_metadata(alembic_runner):
-    experimental.test_all_models_register_on_metadata(alembic_runner, "pushservice_db")
+    experimental.test_all_models_register_on_metadata(alembic_runner, "database.models")

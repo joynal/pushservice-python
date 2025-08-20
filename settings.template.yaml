@@ -9,6 +9,11 @@ kafka:
   brokers:
     - localhost:9093
 
+web_api:
+  enabled: true
+  host: 'localhost'
+  port: 5000
+
 parser:
   topic: "raw-push"
   group_id: "ParserConsumerGroup"

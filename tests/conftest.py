@@ -7,7 +7,7 @@ import sqlalchemy
 
 sys.path.insert(0, dirname(dirname(__file__)))
 
-from pushservice.settings import load  # noqa: E402
+from pushservice.settings import load_settings  # noqa: E402
 from pushservice.settings import Settings  # noqa: E402
 
 
@@ -37,7 +37,7 @@ def alembic_engine():
         }
         settings: Settings = Settings(**ci_db_settings)
     else:
-        settings: Settings = load("./settings.yaml")
+        settings: Settings = load_settings("./settings.yaml")
 
     url = settings.database.connection_string.replace("postgres://", "postgresql://", 1)
     return sqlalchemy.create_engine(url)

@@ -1,16 +1,17 @@
 import argparse
 import asyncio
+
 from pushservice.adapters.secondary.persistence_sql.client import (
     create_connection_pool,
 )
 from pushservice.adapters.secondary.persistence_sql.push_repo import PushRepoSql
-from pushservice.settings import load
+from pushservice.settings import load_settings
 
 parser = argparse.ArgumentParser(description="Push generator script")
 parser.add_argument("-s", "--site-id", help="Site id for push", required=True)
 args = parser.parse_args()
 
-settings = load("./settings.yaml")
+settings = load_settings("./settings.yaml")
 
 
 async def main():

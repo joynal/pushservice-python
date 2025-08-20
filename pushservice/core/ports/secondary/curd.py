@@ -24,20 +24,3 @@ class CrudRepo(ABC):
     @abstractmethod
     def delete(self, *, entity_id: UUID):
         raise NotImplementedError()
-
-    # @abstractmethod
-    # def get_many_by_id(self, entity_ids):
-    #     raise NotImplementedError()
-    #
-    # @abstractmethod
-    # def get_all(self):
-    #     raise NotImplementedError()
-    #
-
-    # @abstractmethod
-    # def diff(self, entity):
-    #     raise NotImplementedError()
-    #
-    # @abstractmethod
-    # def upsert(self, entity):
-    #     raise NotImplementedError()

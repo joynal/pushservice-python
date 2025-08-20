@@ -3,13 +3,14 @@ import asyncio
 import math
 import random
 import secrets
+
 from pushservice.adapters.secondary.persistence_sql.client import (
     create_connection_pool,
 )
 from pushservice.adapters.secondary.persistence_sql.subscriber_repo import (
     SubscriberRepoSql,
 )
-from pushservice.settings import load
+from pushservice.settings import load_settings
 
 parser = argparse.ArgumentParser(description="Subscriber generator script")
 parser.add_argument("-s", "--site-id", help="Site id for subscribers", required=True)
@@ -19,7 +20,7 @@ parser.add_argument(
 parser.add_argument("-b", "--batch-size", help="Insertion batch size", default=20000)
 args = parser.parse_args()
 
-settings = load("./settings.yaml")
+settings = load_settings("./settings.yaml")
 
 
 def generate_endpoint():

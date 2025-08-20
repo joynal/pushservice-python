@@ -1,0 +1,16 @@
+alembic==1.16.4
+asyncpg==0.30.0
+black==25.1.0
+dacite==1.9.2
+ecdsa==0.19.1
+fastapi==0.116.1
+kafka-python==2.2.15
+psycopg2-binary==2.9.10
+pytest-alembic==0.12.1
+pywebpush==2.0.3
+pytest-asyncio==1.1.0
+pyyaml==6.0.2
+rich==14.1.0
+sqlalchemy==2.0.43
+starlette==0.47.2
+uvicorn==0.35.0

@@ -2,6 +2,8 @@ import argparse
 import asyncio
 import json
 from dataclasses import asdict
+from uuid import UUID
+
 from pushservice.adapters.secondary.persistence_sql.client import (
     create_connection_pool,
 )
@@ -11,14 +13,13 @@ from pushservice.adapters.secondary.publisher_kafka.client import KafkaPublisher
 from pushservice.core.domain.entities import Push
 from pushservice.core.domain.entities import Site
 from pushservice.core.domain.uuid_encoder import UUIDEncoder
-from pushservice.settings import load
-from uuid import UUID
+from pushservice.settings import load_settings
 
 parser = argparse.ArgumentParser(description="schedule push script")
 parser.add_argument("-n", "--push-id", help="Push id", required=True)
 args = parser.parse_args()
 
-settings = load("./settings.yaml")
+settings = load_settings("./settings.yaml")
 
 
 async def main():

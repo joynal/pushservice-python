@@ -1,5 +1,4 @@
 import logging
-from abc import ABC
 from dataclasses import asdict
 from dataclasses import dataclass
 from dataclasses import field
@@ -10,8 +9,8 @@ from dacite import from_dict
 logger = logging.getLogger()
 
 
-class BaseSettings(ABC):
-    def display(self) -> [str]:
+class BaseSettings:
+    def display(self) -> list[str]:
         settings = vars(self)
 
         fields = []
@@ -19,8 +18,8 @@ class BaseSettings(ABC):
         for key in settings:
             if issubclass(type(settings[key]), BaseSettings):
                 sub_fields = settings[key].display()
-                for field in sub_fields:
-                    fields.append(f"{key} | {field}")
+                for f in sub_fields:
+                    fields.append(f"{key} | {f}")
             else:
                 if key in self._sensitive_fields():
                     masked_field = self._mask(key, settings[key])
@@ -31,7 +30,7 @@ class BaseSettings(ABC):
         return fields
 
     @staticmethod
-    def _sensitive_fields() -> [str]:
+    def _sensitive_fields() -> list[str]:
         """
         The field name of any sensitive values should go here, so they get masked
         """
@@ -76,9 +75,10 @@ class DatabaseSettings(BaseSettings):
 
 
 @dataclass(frozen=True)
-class TopicSettings(BaseSettings):
+class WorkerSettings(BaseSettings):
     topic: str
     group_id: str
+    log_level: str = "info"
 
 
 @dataclass(frozen=True)
@@ -93,8 +93,8 @@ class Settings(BaseSettings):
     web_api: WebApiSettings
     database: DatabaseSettings
     kafka: KafkaSettings
-    parser: TopicSettings
-    sender: TopicSettings
+    parser: WorkerSettings
+    sender: WorkerSettings
     monitor: MonitorSettings = MonitorSettings()
 
 
@@ -119,7 +119,7 @@ def load_settings(path_to_settings: str) -> Settings:
 
         return settings
     except (TypeError, FileNotFoundError):
-        return from_dict(Settings, data=dict())
+        return from_dict(Settings, data={})
 
 
 def dump_settings(settings: Settings):

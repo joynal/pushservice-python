@@ -1,10 +1,10 @@
 import logging
-from pushservice.adapters.primary.runnable import Runnable
-from pushservice.settings import KafkaSettings
-from pushservice.settings import TopicSettings
-from typing import Callable
+from collections.abc import Callable
 
 from kafka import KafkaConsumer
+from pushservice.adapters.primary.runnable import Runnable
+from pushservice.settings import KafkaSettings
+from pushservice.settings import WorkerSettings
 
 
 class SubscriberKafka(Runnable):
@@ -12,14 +12,14 @@ class SubscriberKafka(Runnable):
         self,
         *,
         kafka_settings: KafkaSettings,
-        topic_settings: TopicSettings,
+        worker_settings: WorkerSettings,
         callback: Callable,
     ):
         super().__init__()
         self.event_loop = None
         self.consumer = None
         self.kafka_settings = kafka_settings
-        self.topic_settings = topic_settings
+        self.worker_settings = worker_settings
         self.callback = callback
         self.logger = logging.getLogger("KAFKA_ADAPTER")
 
@@ -27,8 +27,8 @@ class SubscriberKafka(Runnable):
         self.logger.info("subscribing to kafka")
         # To consume latest messages and auto-commit offsets
         self.consumer = KafkaConsumer(
-            self.topic_settings.topic,
-            group_id=self.topic_settings.group_id,
+            self.worker_settings.topic,
+            group_id=self.worker_settings.group_id,
             bootstrap_servers=self.kafka_settings.brokers,
         )
         await self.consume()

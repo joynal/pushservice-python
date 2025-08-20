@@ -1,4 +1,5 @@
 import logging
+
 from pushservice.adapters.primary.runnable import Runnable
 from pushservice.adapters.primary.subscriber_kafka.runner import SubscriberKafka
 from pushservice.adapters.secondary.persistence_sql.client import (
@@ -36,7 +37,7 @@ class Application:
             sender = PushSender(subscriber_repo)
             parser_stream = SubscriberKafka(
                 kafka_settings=self.settings.kafka,
-                topic_settings=self.settings.sender,
+                worker_settings=self.settings.sender,
                 callback=sender.process,
             )
             await parser_stream.run()

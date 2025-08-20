@@ -1,8 +1,8 @@
-from database.models import Base
 from logging.config import fileConfig
-from pushservice.settings import load
 
 from alembic import context
+from database.models import Base
+from pushservice.settings import load_settings
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
@@ -11,7 +11,7 @@ from sqlalchemy import pool
 
 config = context.config
 
-settings = load("./settings.yaml")
+settings = load_settings("./settings.yaml")
 
 if not settings.database.connection_string:
     print("database connection is not configured in settings.yaml")
